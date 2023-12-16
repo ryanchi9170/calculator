@@ -1,0 +1,45 @@
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid black;
+  margin-top: 100px;
+  width: 400px;
+  height: 500px;
+}
+
+.display {
+  border: 1.5px solid black;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.keypad {
+  border: 1.5px solid black;
+  flex-grow: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+.number {
+  align-self: center;
+  margin-right: 20px;
+  font-size: 50px;
+}
+
+.row {
+  display: flex;
+  flex-grow: 1;
+}
+
+.button {
+  flex-grow: 1;
+  width: 100px;
+  font-size: 20px;
+}
