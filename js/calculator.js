@@ -6,15 +6,131 @@ function createButtons() {
     keypad.appendChild(row);
     for (let j = 0; j < 4; j++) {
       const button = document.createElement('button');
-      button.className = 'button';
+      button.className = `button a${i}${j}`;
       button.textContent = buttonValues[buttonValueIndex];
+      button.addEventListener('click', (e) => buttonOnClick(e.target.className.slice(-3)))
       row.append(button);
       buttonValueIndex++;
     }
   }
 }
 
-const currentNumber = 0;
+function buttonOnClick(id) {
+  console.log(id);
+  function checkForZero() {
+    if (number.textContent === '0') {
+      return true;
+    }
+  }
+  if (id === 'a00') {
+
+  }
+  if (id === 'a01') {
+
+  }
+  if (id === 'a02') {
+
+  }
+  if (id === 'a03') {
+
+  }
+  if (id === 'a10') {
+    if (checkForZero()) {
+      number.textContent = '7';
+    }
+    else {
+      number.textContent = number.textContent + '7';
+    }
+  }
+  if (id === 'a11') {
+    if (checkForZero()) {
+      number.textContent = '8';
+    }
+    else {
+      number.textContent = number.textContent + '8';
+    }
+  }
+  if (id === 'a12') {
+    if (checkForZero()) {
+      number.textContent = '9';
+    }
+    else {
+      number.textContent = number.textContent + '9';
+    }
+  }
+  if (id === 'a13') {
+
+  }
+  if (id === 'a20') {
+    if (checkForZero()) {
+      number.textContent = '4';
+    }
+    else {
+      number.textContent = number.textContent + '4';
+    }
+  }
+  if (id === 'a21') {
+    if (checkForZero()) {
+      number.textContent = '5';
+    }
+    else {
+      number.textContent = number.textContent + '5';
+    }
+  }
+  if (id === 'a22') {
+    if (checkForZero()) {
+      number.textContent = '6';
+    }
+    else {
+      number.textContent = number.textContent + '6';
+    }
+  }
+  if (id === 'a23') {
+
+  }
+  if (id === 'a30') {
+    if (checkForZero()) {
+      number.textContent = '1';
+    }
+    else {
+      number.textContent = number.textContent + '1';
+    }
+  }
+  if (id === 'a31') {
+    if (checkForZero()) {
+      number.textContent = '2';
+    }
+    else {
+      number.textContent = number.textContent + '2';
+    }
+  }
+  if (id === 'a32') {
+    if (checkForZero()) {
+      number.textContent = '3';
+    }
+    else {
+      number.textContent = number.textContent + '3';
+    }
+  }
+  if (id === 'a33') {
+
+  }
+  if (id === 'a40') {
+
+  }
+  if (id === 'a41') {
+
+  }
+  if (id === 'a42') {
+
+  }
+  if (id === 'a43') {
+
+  }
+
+}
+
+let currentNumber = '0';
 
 const buttonValues = ['x²', 'C', '⬅️', '÷', '7', '8', '9', '×', '4', '5', '6','-', '1', '2', '3', '+', '+/-', '0', '.', '=']
 
@@ -42,3 +158,6 @@ calculator.appendChild(keypad);
 display.appendChild(number);
 
 createButtons();
+
+// const button = document.querySelector('.a00');
+// console.log(button);
