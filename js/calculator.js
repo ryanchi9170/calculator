@@ -15,6 +15,49 @@ function createButtons() {
   }
 }
 
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+function subtract(num1, num2) {
+  return num1 - num2;
+}
+
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+
+function divide(num1, num2) {
+  return num1 / num2;
+}
+
+function power(num1, num2) {
+  let result = 1;
+  if (num2 === 0) {
+    return 1;
+  }
+  for (let i = 0; i < num2; i++) {
+    result = num1 * result;
+  }
+  return result;
+}
+
+function operate() {
+  if (operator === 'add') {
+    number.textContent = add(firstNumber, secondNumber);
+  }
+  if (operator === 'subtract') {
+    number.textContent = subtract(firstNumber, secondNumber);
+  }
+  if (operator === 'multiply') {
+    number.textContent = multiply(firstNumber, secondNumber);
+  }
+  if (operator === 'divide') {
+    number.textContent = divide(firstNumber, secondNumber);
+  }
+  return Number(number.textContent);
+}
+
 function buttonOnClick(id) {
   console.log(id);
   function checkForZero() {
@@ -33,8 +76,12 @@ function buttonOnClick(id) {
       id === 'a31' ||
       id === 'a32' ||
       id === 'a41') {
-        if (number.textContent.length >= 12) {
+        if (number.textContent.length >= 12) { // abc
           return;
+        }
+        if (typeof firstNumber === 'number' && toggle === true) {
+          number.textContent = '0';
+          toggle = false;;
         }
         if (id === 'a10') {
           if (checkForZero()) {
@@ -120,6 +167,9 @@ function buttonOnClick(id) {
     }
     if (id === 'a01') {
       number.textContent = '0';
+      firstNumber = 0;
+      secondNumber = 0;
+      operator = '';
     }
     if (id === 'a02') {
       if (number.textContent.length === 1) {
@@ -129,37 +179,67 @@ function buttonOnClick(id) {
         number.textContent = number.textContent.slice(0, number.textContent.length - 1);
       }
     }
-    if (id === 'a03') {
+    if (id === 'a03') { // ÷
 
     }
-    if (id === 'a13') {
-
-    }
-
-    if (id === 'a23') {
+    if (id === 'a13') { // *
 
     }
 
-    if (id === 'a33') {
+    if (id === 'a23') { // -
 
     }
-    if (id === 'a40') {
+
+    if (id === 'a33') { // + abc
+      let storedValue = +number.textContent;
+      // if (operator = 'add') {
+      //   return;
+      // }
+      operator = 'add';
+      if (firstNumber === '0') {
+        firstNumber = storedValue;
+        toggle = true;
+      }
+      else {
+        secondNumber = storedValue;
+        operate();
+        firstNumber = +number.textContent;
+        toggle = true;
+      }
+    }
+    if (id === 'a40') { // +/-
+      if (number.textContent.indexOf('-') < 0) {
+        number.textContent = `-${number.textContent}`;
+      }
+      else {
+        number.textContent = number.textContent.slice(1);
+      }
 
     }
-    if (id === 'a42') {
-
+    if (id === 'a42') { // .
+      if (number.textContent.indexOf('.') < 0) {
+        number.textContent = number.textContent + '.';
+      }
     }
-    if (id === 'a43') {
-
+    if (id === 'a43') { // =
+      secondNumber = Number(number.textContent);
+      operate();
+      firstNumber = Number(number.textContent);
+      operator = '';
     }
 
   }
+
+  console.log(`firstNumber: ${firstNumber}, secondNumber: ${secondNumber}`)
+  // console.log(`number.textContent: ${number.textContent}, typeof number.textContent: ${typeof number.textContent}`);
 
 }
 
 let currentNumber = '0';
 let firstNumber = '0';
 let secondNumber = '0';
+let operator = '';
+let toggle = false;
 
 const buttonValues = ['x²', 'C', '⬅️', '÷', '7', '8', '9', '×', '4', '5', '6','-', '1', '2', '3', '+', '+/-', '0', '.', '=']
 
