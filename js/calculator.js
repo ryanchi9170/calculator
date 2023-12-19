@@ -187,22 +187,40 @@ function buttonOnClick(id) {
     }
 
     if (id === 'a23') { // -
-
-    }
-
-    if (id === 'a33') { // + abc
+      if (operator && toggle) {
+        operator = 'subtract';
+        return;
+      }
       let storedValue = +number.textContent;
-      // if (operator = 'add') {
-      //   return;
-      // }
-      operator = 'add';
       if (firstNumber === '0') {
+        operator = 'subtract';
         firstNumber = storedValue;
         toggle = true;
       }
       else {
         secondNumber = storedValue;
         operate();
+        operator = 'subtract';
+        firstNumber = +number.textContent;
+        toggle = true;
+      }
+    }
+
+    if (id === 'a33') { // +
+      if (operator && toggle) {
+        operator = 'add';
+        return;
+      }
+      let storedValue = +number.textContent;
+      if (firstNumber === '0') {
+        operator = 'add';
+        firstNumber = storedValue;
+        toggle = true;
+      }
+      else {
+        secondNumber = storedValue;
+        operate();
+        operator = 'add';
         firstNumber = +number.textContent;
         toggle = true;
       }
