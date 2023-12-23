@@ -109,6 +109,11 @@ function power(num1, num2) {
 }
 
 function operate() {
+  let firstNumberLength = firstNumber.toString().length;
+  let secondNumberLength = secondNumber.toString().length;
+  console.log(firstNumber, firstNumberLength)
+  console.log(secondNumber, secondNumberLength)
+  console.log(Math.max(firstNumberLength, secondNumberLength));
   if (operator === 'add') {
     number.textContent = add(firstNumber, secondNumber);
   }
@@ -356,6 +361,10 @@ function buttonOnClick(id) {
 
     }
     if (id === 'a42') { // .
+      if (typeof firstNumber === 'number' && toggle === true) {
+        number.textContent = '0';
+        toggle = false;;
+      }
       if (number.textContent.indexOf('.') < 0) {
         number.textContent = number.textContent + '.';
       }
