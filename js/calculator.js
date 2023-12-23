@@ -9,11 +9,73 @@ function createButtons() {
       button.className = `button a${i}${j}`;
       button.textContent = buttonValues[buttonValueIndex];
       button.addEventListener('click', (e) => buttonOnClick(e.target.className.slice(-3)))
+      // button.addEventListener('keydown', (e) => console.log(e));
       row.append(button);
       buttonValueIndex++;
     }
   }
 }
+
+document.addEventListener('keydown', (e) => {
+  console.log(e.key)
+  if (e.key === '1') {
+    buttonOnClick('a30');
+  }
+  if (e.key === '2') {
+    buttonOnClick('a31');
+  }
+  if (e.key === '3') {
+    buttonOnClick('a32');
+  }
+  if (e.key === '4') {
+    buttonOnClick('a20');
+  }
+  if (e.key === '5') {
+    buttonOnClick('a21');
+  }
+  if (e.key === '6') {
+    buttonOnClick('a22');
+  }
+  if (e.key === '7') {
+    buttonOnClick('a10');
+  }
+  if (e.key === '8') {
+    buttonOnClick('a11');
+  }
+  if (e.key === '9') {
+    buttonOnClick('a12');
+  }
+  if (e.key === '0') {
+    buttonOnClick('a41');
+  }
+  if (e.key === '+') {
+    buttonOnClick('a33');
+  }
+  if (e.key === '-') {
+    buttonOnClick('a23');
+  }
+  if (e.key === '*') {
+    buttonOnClick('a13');
+  }
+  if (e.key === '/') {
+    buttonOnClick('a03');
+  }
+  if (e.key === 'Escape') {
+    buttonOnClick('a01');
+  }
+  if (e.key === 'Backspace') {
+    buttonOnClick('a02');
+  }
+  if (e.key === '^') {
+    buttonOnClick('a00');
+  }
+  if (e.key === '.') {
+    buttonOnClick('a42');
+  }
+  if (e.key === 'Enter') {
+    buttonOnClick('a43');
+  }
+})
 
 function add(num1, num2) {
   return num1 + num2;
@@ -28,6 +90,9 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+  if (num2 === 0) {
+    return 'Err';
+  }
   return num1 / num2;
 }
 
@@ -68,6 +133,10 @@ function buttonOnClick(id) {
     if (number.textContent === '0') {
       return true;
     }
+  }
+
+  if (number.textContent === 'Err') {
+    return;
   }
 
   if (id === 'a10' ||
