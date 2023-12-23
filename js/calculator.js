@@ -38,6 +38,7 @@ function power(num1, num2) {
   }
   for (let i = 0; i < num2; i++) {
     result = num1 * result;
+    console.log(result);
   }
   return result;
 }
@@ -54,6 +55,9 @@ function operate() {
   }
   if (operator === 'divide') {
     number.textContent = divide(firstNumber, secondNumber);
+  }
+  if (operator === 'power') {
+    number.textContent = power(firstNumber, secondNumber);
   }
   return Number(number.textContent);
 }
@@ -163,7 +167,23 @@ function buttonOnClick(id) {
       }
   else {
     if (id === 'a00') {
-
+      if (operator && toggle) {
+        operator = 'power';
+        return;
+      }
+      let storedValue = +number.textContent;
+      if (firstNumber === '0') {
+        operator = 'power';
+        firstNumber = storedValue;
+        toggle = true;
+      }
+      else {
+        secondNumber = storedValue;
+        operate();
+        operator = 'power';
+        firstNumber = +number.textContent;
+        toggle = true;
+      }
     }
     if (id === 'a01') {
       number.textContent = '0';
@@ -180,10 +200,42 @@ function buttonOnClick(id) {
       }
     }
     if (id === 'a03') { // ÷
-
+      if (operator && toggle) {
+        operator = 'divide';
+        return;
+      }
+      let storedValue = +number.textContent;
+      if (firstNumber === '0') {
+        operator = 'divide';
+        firstNumber = storedValue;
+        toggle = true;
+      }
+      else {
+        secondNumber = storedValue;
+        operate();
+        operator = 'divide';
+        firstNumber = +number.textContent;
+        toggle = true;
+      }
     }
     if (id === 'a13') { // *
-
+      if (operator && toggle) {
+        operator = 'multiply';
+        return;
+      }
+      let storedValue = +number.textContent;
+      if (firstNumber === '0') {
+        operator = 'multiply';
+        firstNumber = storedValue;
+        toggle = true;
+      }
+      else {
+        secondNumber = storedValue;
+        operate();
+        operator = 'multiply';
+        firstNumber = +number.textContent;
+        toggle = true;
+      }
     }
 
     if (id === 'a23') { // -
@@ -259,7 +311,7 @@ let secondNumber = '0';
 let operator = '';
 let toggle = false;
 
-const buttonValues = ['x²', 'C', '⬅️', '÷', '7', '8', '9', '×', '4', '5', '6','-', '1', '2', '3', '+', '+/-', '0', '.', '=']
+const buttonValues = ['xⁿ', 'C', '⬅️', '÷', '7', '8', '9', '×', '4', '5', '6','-', '1', '2', '3', '+', '+/-', '0', '.', '=']
 
 const container = document.querySelector('#container');
 
