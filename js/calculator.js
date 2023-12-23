@@ -9,7 +9,6 @@ function createButtons() {
       button.className = `button a${i}${j}`;
       button.textContent = buttonValues[buttonValueIndex];
       button.addEventListener('click', (e) => buttonOnClick(e.target.className.slice(-3)))
-      // button.addEventListener('keydown', (e) => console.log(e));
       row.append(button);
       buttonValueIndex++;
     }
@@ -17,7 +16,6 @@ function createButtons() {
 }
 
 document.addEventListener('keydown', (e) => {
-  console.log(e.key)
   if (e.key === '1') {
     buttonOnClick('a30');
   }
@@ -109,16 +107,27 @@ function power(num1, num2) {
 }
 
 function operate() {
-  let firstNumberLength = firstNumber.toString().length;
-  let secondNumberLength = secondNumber.toString().length;
-  console.log(firstNumber, firstNumberLength)
-  console.log(secondNumber, secondNumberLength)
-  console.log(Math.max(firstNumberLength, secondNumberLength));
+  let digitsAfterDecimal = 0;
+  if (firstNumber.toString().indexOf('.') > -1 || secondNumber.toString().indexOf('.') > -1) {
+    let firstNumberString = firstNumber.toString();
+    let secondNumberString = secondNumber.toString();
+    function containsDecimal(str) {
+      if (str.indexOf('.') > -1) {
+        return str.indexOf('.');
+      }
+      else {
+        return 100;
+      }
+    }
+    digitsAfterDecimal = Math.max(firstNumberString.length - containsDecimal(firstNumberString) - 1, secondNumberString.length - containsDecimal(secondNumberString) - 1);
+
+    console.log(digitsAfterDecimal);
+  }
   if (operator === 'add') {
-    number.textContent = add(firstNumber, secondNumber);
+    number.textContent = add(firstNumber, secondNumber).toFixed(digitsAfterDecimal);
   }
   if (operator === 'subtract') {
-    number.textContent = subtract(firstNumber, secondNumber);
+    number.textContent = subtract(firstNumber, secondNumber).toFixed(digitsAfterDecimal);
   }
   if (operator === 'multiply') {
     number.textContent = multiply(firstNumber, secondNumber);
@@ -133,7 +142,13 @@ function operate() {
 }
 
 function buttonOnClick(id) {
-  console.log(id);
+  // console.log(id);
+  if (id === 'a01') {
+    number.textContent = '0';
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = '';
+  }
   function checkForZero() {
     if (number.textContent === '0') {
       return true;
@@ -259,12 +274,6 @@ function buttonOnClick(id) {
         toggle = true;
       }
     }
-    if (id === 'a01') {
-      number.textContent = '0';
-      firstNumber = 0;
-      secondNumber = 0;
-      operator = '';
-    }
     if (id === 'a02') {
       if (number.textContent.length === 1) {
         number.textContent = '0';
@@ -377,10 +386,6 @@ function buttonOnClick(id) {
     }
 
   }
-
-  console.log(`firstNumber: ${firstNumber}, secondNumber: ${secondNumber}`)
-  // console.log(`number.textContent: ${number.textContent}, typeof number.textContent: ${typeof number.textContent}`);
-
 }
 
 let currentNumber = '0';
